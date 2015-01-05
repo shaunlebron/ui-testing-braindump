@@ -56,14 +56,19 @@ wants.
 
 ### Brittleness of tests
 
-It seems that UI tests will always have a level of brittleness that will be
-hard to reconcile with changes.  This may be offset by failing fast with
-quick-running tests to make help the speed at which they can be fixed.
+UI test fragility is easier to talk about when focusing on the fragility of the
+components that comprise a page.  It seems components are fragile on two
+separate levels: position and nature.
 
-Building abstractions called Page Objects may help make high-level UI steps
-more general by adding an abstraction layer around html selectors.  This should
-help shield the high-level UI test steps from implementation details specified
-in the page object steps.
+Its __position__ and other place-oriented details can change, causing us to
+change our queries for locating/updating them.  But its __nature__ can also
+change.  For example, its underlying component could disappear if its not
+needed anymore or if its role fuses with another.
+
+The position-type fragility can be addressed by creating Page Objects using
+Site Prism, hiding position-level details from the test steps.  The nature-type
+fragility is inherent to the problem of changing UI behavior.  Changes will
+unavoidably have to be made across test steps and Page Objects.
 
 - [discussion about testing difficulties and desires at PROS](https://www.yammer.com/pros.com/#/threads/inGroup?type=in_group&feedId=3931726)
 - <http://www.cheezyworld.com/2010/11/09/ui-tests-not-brittle/>
